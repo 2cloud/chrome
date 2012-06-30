@@ -95,13 +95,13 @@ twocloud.indexedDB.users.add = function(user, onSuccess, onError) {
 		"email": user.Email.Name + "@" + user.Email.Domain,
 		"email_confirmed": user.Email.Confirmed,
 		"admin": user.IsAdmin,
-		"joined": user.Joined,
-		"last_active": user.LastActive,
+		"joined": new Date(user.Joined).getTime(),
+		"last_active": new Date(user.LastActive).getTime(),
 		"given_name": user.Name.Given,
 		"family_name": user.Name.Family,
 		"secret": user.Secret,
 		"stripe_id": user.StripeID,
-		"subscription_expiration": user.SubscriptionExpiration,
+		"subscription_expiration": new Date(user.SubscriptionExpiration).getTime(),
 		"username": user.Username.Display,
 		"last_synced": new Date().getTime()
 	};
@@ -188,7 +188,7 @@ twocloud.indexedDB.devices.add = function(device, onSuccess, onError) {
 		"slug": device.Slug,
 		"name": device.Name,
 		"platform": device.Platform,
-		"last_link": device.LastLink,
+		"last_link": new Date(device.LastLink).getTime(),
 		"last_synced": new Date().getTime()
 	};
 	
@@ -290,8 +290,8 @@ twocloud.indexedDB.links.add = function(link, onSuccess, onError) {
 		"url": url,
 		"unread": link.New,
 		"origin": link.Origin,
-		"sent": link.Sent,
-		"received": link.Received,
+		"sent": new Date(link.Sent).getTime(),
+		"received": new Date(link.Received).getTime(),
 		"last_synced": new Date().getTime()
 	};
 
