@@ -25,7 +25,7 @@ twocloud.indexedDB.open = function(onSuccess, onError) {
 	}
 	
 	request.onsuccess = function(e) {
-		var v = "1";
+		var v = "2";
 		twocloud.indexedDB.db = e.target.result;
 		var db = twocloud.indexedDB.db;
 		// We can only create Object stores in a setVersion transaction;
@@ -54,6 +54,8 @@ twocloud.indexedDB.open = function(onSuccess, onError) {
 				var device_store = db.createObjectStore("devices", {
 					keyPath: "slug"
 				});
+
+				var last_link_index = device_store.createIndex("last_link", "last_link");
 
 				var link_store = db.createObjectStore("links", {
 					keyPath: "id"
@@ -227,7 +229,7 @@ twocloud.indexedDB.devices.remove = function(slug, onSuccess, onError) {
 	};
 };
 
-twocloud.indexedDB.devices.list = function(onSuccess, onError) {
+twocloud.indexedDB.devices.list = function(sortByName, onSuccess, onError) {
 	if(onSuccess == null) {
 		onSuccess = function(row){};
 	}
@@ -240,10 +242,14 @@ twocloud.indexedDB.devices.list = function(onSuccess, onError) {
 	var db = twocloud.indexedDB.db;
 	var trans = db.transaction(["devices"], IDBTransaction.READ_WRITE);
 	var store = trans.objectStore("devices");
-	
-	// Get everything in the store;
-	var keyRange = IDBKeyRange.lowerBound(0);
-	var cursorRequest = store.openCursor(keyRange);
+
+	if(!sortByName) {
+		var index = store.index("last_link");
+		// Get everything in the store sorted by last_link;
+		var cursorRequest = index.openCursor(null, 2);
+	} else {
+		var cursorRequest = store.openCursor();
+	}
 	
 	cursorRequest.onsuccess = function(e) {
 		var result = e.target.result;

@@ -15,13 +15,6 @@ twocloud.context.callback = function(info, tab) {
 	}
 };
 
-twocloud.context.init = function () {
-	twocloud.context.root = chrome.contextMenus.create({
-		"title": "Send With 2cloud",
-		"contexts": ["link"]
-	});
-};
-
 twocloud.context.addDevice = function(device) {
 	for(id in twocloud.context.map) {
 		if(twocloud.context.map[id].slug == device.slug) {
@@ -50,7 +43,7 @@ twocloud.context.removeDevice = function(device) {
 twocloud.context.updateDevice = function(device) {
 	for(id in twocloud.context.map) {
 		if(twocloud.context.map[id].slug == device.slug) {
-			chrome.contextMenus.update(id, {
+			chrome.contextMenus.update(parseInt(id), {
 				"title": device.name
 			});
 			break;
@@ -59,5 +52,9 @@ twocloud.context.updateDevice = function(device) {
 };
 
 twocloud.context.init = function() {
-	twocloud.indexedDB.devices.list(function(device) { twocloud.context.addDevice(device); });
+	twocloud.context.root = chrome.contextMenus.create({
+		"title": "Send With 2cloud",
+		"contexts": ["link"]
+	});
+	twocloud.indexedDB.devices.list(false, function(device) { twocloud.context.addDevice(device); });
 };
