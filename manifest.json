@@ -1,0 +1,15 @@
+{
+	"name": "2cloud",
+	"version": "3.0",
+	"manifest_version": 2,
+	"description": "Send your links between your devices.",
+	"permissions": [
+		"<all_urls>",
+		"contextMenus",
+		"tabs"
+	],
+	"background": {
+		"page": "background.html"
+	},
+	"content_security_policy": "default-src 'self' https://*.2cloud.org; connect-src 'self' *"
+}
