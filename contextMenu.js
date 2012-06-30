@@ -18,7 +18,7 @@ twocloud.context.callback = function(info, tab) {
 twocloud.context.addDevice = function(device) {
 	for(id in twocloud.context.map) {
 		if(twocloud.context.map[id].slug == device.slug) {
-			return twocloud.context.updateDevice(device);
+			twocloud.context.removeDevice(device);
 		}
 	}
 	id = chrome.contextMenus.create({
