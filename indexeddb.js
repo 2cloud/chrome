@@ -197,7 +197,7 @@ twocloud.indexedDB.devices.add = function(device, onSuccess, onError) {
 	var request = store.put(data);
 	
 	request.onsuccess = function(e) {
-		onSuccess();
+		onSuccess(data);
 	};
 	
 	request.onerror = function(e) {
@@ -226,6 +226,29 @@ twocloud.indexedDB.devices.remove = function(slug, onSuccess, onError) {
 	
 	request.onerror = function(e) {
 		onError(e)
+	};
+};
+
+twocloud.indexedDB.devices.clear = function(onSuccess, onError) {
+	if(onSuccess == null) {
+		onSuccess = function(){};
+	}
+	if(onError == null) {
+		onError = function(e) {
+			console.log(e);
+		};
+	}
+	var db = twocloud.indexedDB.db;
+	var trans = db.transaction(["devices"], IDBTransaction.READ_WRITE);
+	var store = trans.objectStore("devices");
+	var request = store.clear();
+
+	request.onsuccess = function(e) {
+		onSuccess();
+	};
+
+	request.onerror = function(e) {
+		onError(e);
 	};
 };
 
