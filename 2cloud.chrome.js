@@ -1,10 +1,11 @@
 twocloud.chrome = {};
 twocloud.chrome.icon = {}
 twocloud.chrome.devices = {};
+twocloud.chrome.users = {};
 
 twocloud.chrome.icon.auth_error = function() {
 	chrome.browserAction.setIcon({
-		"path": "images/error.png"
+		"path": "img/error.png"
 	});
 	chrome.browserAction.setTitle({"title": "Please log in."});
 	chrome.browserAction.setPopup({"popup": "browser_actions/auth.html"});
@@ -44,11 +45,40 @@ twocloud.chrome.devices.sync = function(user, onSuccess, onError) {
 	});
 };
 
+twocloud.chrome.users.load = function(callback) {
+	if(localStorage["username"] == null || localStorage["username"] == "") {
+		bg = chrome.extension.getBackgroundPage();
+		bg.twocloud.auth.username = null;
+		bg.twocloud.auth.secret = null;
+		bg.twocloud.chrome.icon.auth_error();
+		return callback();
+	}
+	twocloud.indexedDB.users.get(localStorage["username"], function(user) {
+		bg = chrome.extension.getBackgroundPage();
+		bg.twocloud.auth.username = user.username;
+		bg.twocloud.auth.secret = user.secret;
+		return callback();
+	}, function(error) {
+		bg = chrome.extension.getBackgroundPage();
+		console.log(error);
+		bg.twocloud.chrome.icon.auth_error();
+		return callback();
+	});
+};
+
+twocloud.chrome.init = function() {
+	twocloud.chrome.users.load(function() {
+		if(twocloud.auth.username != null && twocloud.auth.secret != null) {
+			twocloud.chrome.devices.sync(twocloud.auth.username);
+		}
+	});
+}
+
 twocloud.indexedDB.init(function() {
 	twocloud.context.init();
-	if(twocloud.auth.username != null && twocloud.auth.secret != null) {
-		twocloud.chrome.devices.sync(twocloud.auth.username);
+	if(localStorage["setup"]) {
+		twocloud.chrome.init();
 	} else {
-		twocloud.chrome.icon.auth_error();
+		chrome.tabs.create({"url": chrome.extension.getURL("auth.html")});
 	}
 });

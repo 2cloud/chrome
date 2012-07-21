@@ -173,6 +173,31 @@ twocloud.indexedDB.users.list = function(onSuccess, onError) {
 	cursorRequest.onerror = onError;
 };
 
+twocloud.indexedDB.users.get = function(username, onSuccess, onError) {
+	if(onSuccess == null) {
+		onSuccess = function(user){};
+	}
+	if(onError == null) {
+		onError = function(error) {
+			console.log(error);
+		};
+	}
+
+	var db = twocloud.indexedDB.db;
+	var trans = db.transaction(["users"], IDBTransaction.READ_WRITE);
+	var store = trans.objectStore("users");
+
+	var request = store.get(username);
+
+	request.onsuccess = function(e) {
+		var result = e.target.result;
+		return onSuccess(result);
+	};
+
+	request.onerror = onError;
+};
+
+
 twocloud.indexedDB.devices.add = function(device, onSuccess, onError) {
 	if(onSuccess == null) {
 		onSuccess = function(){};

@@ -1,0 +1,99 @@
+<html>
+	<head>
+		<script src="/jquery.min.js"></script>
+		<link rel="stylesheet" href="/css/bootstrap.css" type="text/css" />
+		<link rel="stylesheet" href="/css/auth.css" type="text/css" />
+	</head>
+	<body>
+		<div class="navbar navbar-fixed-top">
+			<div class="navbar-inner">
+				<div class="container-fluid">
+					<a class="btn btn-navbar" tabIndex="-1" data-toggle="collapse" data-target=".nav-collapse">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</a>
+					<a tabIndex="-1" class="brand" href="http://www.2cloud.org" target="_blank">2cloud</a>
+					<div class="nav-collapse">
+						<ul class="nav">
+							<li class="active"><a tabIndex="-1" href="http://www.2cloud.org" target="_blank"><i class="icon-large icon-home"></i>Home</a></li>
+							<li><a tabIndex="-1" href="http://www.2cloud.org/about" target="_blank"><i class="icon-large icon-info-sign"></i>About</a></li>
+							<li><a tabIndex="-1" href="/links.html" target="_blank"><i class="icon-large icon-list"></i>Link History</a></li>
+							<li class="dropdown" id="contact">
+								<a tabIndex="-1" href="http://www.2cloud.org/contact" target="_blank" data-toggle="dropdown"><i class="icon-large icon-comments"></i>Contact <i class="icon-chevron-down"></i></a>
+								<ul class="dropdown-menu">
+									<li><a tabIndex="-1" href="http://links.2cloud.org/twitter" target="_blank"><i class="icon-large icon-twitter-sign"></i>Twitter</a></li>
+									<li><a tabIndex="-1" href="http://links.2cloud.org/facebook" target="_blank"><i class="icon-large icon-facebook-sign"></i>Facebook</a></li>
+									<li><a tabIndex="-1" href="http://links.2cloud.org/google+" target="_blank"><i class="icon-large icon-plus"></i>Google+</a></li>
+									<li><a tabIndex="-1" href="http://blog.2cloud.org" target="_blank"><i class="icon-large icon-flag"></i>Blog</a></li>
+									<li class="divider"></li>
+									<li><a tabIndex="-1" href="http://www.2cloud.org/email" target="_blank"><i class="icon-large icon-envelope"></i>Email</a></li>
+								</ul>
+							</li>
+							<li><a tabIndex="-1" href="http://help.2cloud.org" target="_blank"><i class="icon-large icon-question-sign"></i>Support</a></li>
+						</ul>
+						<ul class="nav pull-right">
+							<li><a tabIndex="-1" href="#settings-modal" data-target="#settings-modal" data-toggle="modal" data-keyboard="false" data-backdrop="static"><i class="icon-large icon-cogs"></i>Advanced Settings</a></li>
+						</ul>
+					</div><!--/.nav-collapse -->
+				</div>
+			</div>
+		</div>
+		<div class="container">
+			<div class="row-fluid intro">
+				<div class="full">
+					<h1>Let's get to know each other</h1>
+					<p>Before you can start flinging links around, we're going to need to know a bit about you. This won't be too bad. We promise.</p>
+				</div>
+			</div>
+			<div class="row-fluid">
+				<div class="one-fourth well" id="progress">
+					<h2>Step One</h2>
+					<p>We'll send you off to Google to log in. We don't get access to your password.</p>
+
+					<h2>Step Two</h2>
+					<p>Google will ask if it's okay to tell us who you are. We hope you'll say yes&mdash;we can't do anything until you do.</p>
+
+					<h2>Step Three</h2>
+					<p>Google will send you back to us. If you have an account, you'll be logged in. Otherwise, we'll help you set one up.</p>
+				</div>
+				<div class="two-thirds well" id="explanation">
+					<h2>Hey there, handsome.</h2>
+					<p>We're going to need you to log in for us. You can do that for us, right? We worked hard to make it pretty simple for you. All you need to do is tell Google it's okay for them to tell us your name and your email address. Then Google will use industry-standard authentication and identification protocols to securely verify your identity for us. That sounds really complicated, but you just need to click a couple of buttons.</p>
+
+					<p>Even if you're new here and have never used 2cloud before (you poor thing!), just go ahead and tell Google they can tell us who you are. We'll use that information to get an account all set up for you. That's why we ask Google for your name&mdash;it just seemed nicer than asking you to type it all out again. Don't worry, if you don't want us to have it, we don't store any of it until you have a chance to review it. Just delete whatever you don't want stored.</p>
+					<p><a id="login_link" class="btn disabled btn-primary btn-large pull-right">Cool! Let's do it!</a></p>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade hide" id="settings-modal">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">x</button>
+				<h3>Advanced Settings</h3>
+			</div>
+			<div class="modal-body">
+				<p id="warning"><span class="red">Warning!</span> Here there be dragons! If you twiddle with these settings, you can make everything stop working. If you don't know <em>exactly</em> what you're doing, probably best to just leave them alone.</p>
+				<form class="form-horizontal">
+					<fieldset>
+						<div class="control-group">
+							<label class="control-label" for="host_input">Host</label>
+							<div class="controls">
+								<input type="text" class="input-xlarge" id="host_input" placeholder="https://www.2cloud.org">
+								<p class="help-block">The host your data will be stored on. <a href="#" target="_blank">More information</a>.</p>
+							</div>
+						</div>
+					</fieldset>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<a href="#" class="btn" data-dismiss="modal">Cancel</a>
+				<a href="#" class="btn btn-danger">Save</a>
+			</div>
+		</div>
+
+		<script src="bootstrap-dropdown.js"></script>
+		<script src="bootstrap-modal.js"></script>
+		<script src="auth_page.js"></script>
+	</body>
+</html>

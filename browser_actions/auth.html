@@ -1,10 +1,27 @@
 <html>
 	<head>
-		<script src="../jquery.min.js"></script>
-		<script src="auth.js"></script>
+		<script src="/jquery.min.js"></script>
+		<link rel="stylesheet" href="/css/bootstrap.css" type="text/css" />
 		<link rel="stylesheet" href="auth.css" type="text/css" />
 	</head>
 	<body>
-		<p><a href="#" target="_blank" id="login_link">Log in</a></p>
+		<div class="navbar">
+			<div class="navbar-inner">
+				<div class="container">
+					<a class="brand" href="#">2cloud</a>
+				</div>
+			</div>
+		</div>
+
+		<div class="container">
+			<div class="row-fluid">
+				<div class="centered well" id="message">
+					<h2>Oops. Amnesia!</h2>
+					<p class="explanation">This is kind of awkward. We seem to have forgotten who you are. No worries, everything should be okay. But would you mind logging in again? We'll just open a new tab, you'll tell Google who you are, Google will tell us who you are, and we'll all go on our merry way. It's safe and secure, and we never get access to your Google password. What do you say, could you remind us who you are?</p>
+					<p class="centered center-text"><a href="#" id="login_link" class="btn btn-primary btn-large">Yeah, let's do it...</a></p>
+				</div>
+			</div>
+		</div>
+		<script src="auth.js"></script>
 	</body>
 </html>

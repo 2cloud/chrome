@@ -1,0 +1,12 @@
+.navbar .nav > li > a {
+	padding: 10px;
+}
+
+#warning {
+	font-weight: bold;
+	text-align: center;
+}
+
+.red {
+	color: red;
+}
